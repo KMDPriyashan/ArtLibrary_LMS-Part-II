@@ -1,0 +1,45 @@
+package Controller.Member.ManageMember;
+
+import Model.MemberDTO;
+import db.DBConnection;
+import javafx.collections.ObservableList;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import static Controller.Member.ManageMember.manageMemberPageController.MemberList;
+
+public class manageMemberController {
+
+    Connection connection = DBConnection.getInstance().getConnection();
+
+    public void loadMemberDetails(ObservableList<MemberDTO> memberList){
+
+        String getMemberData = "SELECT * FROM members";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(getMemberData);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            MemberList.clear();
+            
+            while (resultSet.next()){
+                String memberID = resultSet.getString("member_id");
+                String memberName = resultSet.getString("full_name");
+                String memberEmail = resultSet.getString("email");
+                String memberPhoneNumber = resultSet.getString("phone_number");
+                String memberAddress = resultSet.getString("address");
+
+                MemberDTO member = new MemberDTO(memberID,memberName,memberEmail,memberPhoneNumber,memberAddress);
+
+                MemberList.add(member);
+            }
+            
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+}

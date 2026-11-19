@@ -1,0 +1,64 @@
+package Controller.Member;
+
+import Model.MemberDTO;
+import javafx.event.ActionEvent;
+import javafx.scene.control.TextField;
+import scene.SceneManager;
+
+public class addMemberPageController {
+    public TextField txtMemberName;
+    public TextField txtMemberEmail;
+    public TextField txtMemberPhonenumber;
+    public TextField txtMemberAddress;
+    public TextField txtMemberID;
+
+    addMemberController addMemberController = new addMemberController();
+
+    public void btnAddBookOnAction(ActionEvent actionEvent) {
+        SceneManager.switchPage("/view/addBook.fxml");
+    }
+
+    public void btnAddmemberOnAction(ActionEvent actionEvent) {
+        SceneManager.switchPage("/view/addMember.fxml");
+    }
+
+    public void btnManageMemberOnAction(ActionEvent actionEvent) {
+        SceneManager.switchPage("/view/manageMember.fxml");
+    }
+
+    public void btnIssueBooksOnAction(ActionEvent actionEvent) {
+        SceneManager.switchPage("/view/newIssueBook.fxml");
+    }
+
+    public void btnreturnBooksOnAction(ActionEvent actionEvent) {
+        SceneManager.switchPage("/view/returnBooks.fxml");
+    }
+
+    public void btnHistoryOnAction(ActionEvent actionEvent) {
+        SceneManager.switchPage("/view/historyPage.fxml");
+    }
+
+    public void btndashboardOnAction(ActionEvent actionEvent) {
+        SceneManager.switchPage("/view/dashboard.fxml");
+    }
+
+    public void btnformClearOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnSubmitAddMemberOnAction(ActionEvent actionEvent) {
+
+        MemberDTO member = new MemberDTO(
+                txtMemberID.getText().trim(),
+                txtMemberName.getText().trim(),
+                txtMemberEmail.getText().trim(),
+                txtMemberAddress.getText().trim(),
+                txtMemberPhonenumber.getText().trim()
+        );
+
+        addMemberController.databaseSaveMemberDetails(member);
+    }
+
+    public void btnBackToHomeOnAction(ActionEvent actionEvent) {
+        SceneManager.switchPage("/view/dashboard.fxml");
+    }
+}

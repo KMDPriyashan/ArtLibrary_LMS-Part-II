@@ -55,12 +55,5 @@ public class HibernateUtil {
         }finally{
             session.close();
         }
-
     }
-
-
-
-
-
-
 }

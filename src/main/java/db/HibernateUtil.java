@@ -38,7 +38,7 @@ public class HibernateUtil {
             sessionFactory.close();
         }
     }
-    public static void executeInTransaction(){
+    public static void executeInTransaction(java.util.function.Consumer<Session> action){
         Session session = getSessionFactory().openSession();
         Transaction tx = null;
 

@@ -38,6 +38,25 @@ public class HibernateUtil {
             sessionFactory.close();
         }
     }
+    public static void executeInTransaction(){
+        Session session = getSessionFactory().openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            action.accept(session);
+            tx.commit();
+        } catch (Exception e) {
+            if(tx != null){
+                tx.rollback();
+                throw e;
+            }
+            throw new RuntimeException(e);
+        }finally{
+            session.close();
+        }
+
+    }
 
 
 

@@ -33,6 +33,14 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
+    public static void shoutdown(){
+        if(sessionFactory != null){
+            sessionFactory.close();
+        }
+    }
+
+
+
 
 
 
